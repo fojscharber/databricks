@@ -1,0 +1,28 @@
+CREATE OR REPLACE VIEW view_mortalities_import_transactions AS
+select
+  date_format(cltrans.transdate, 'M/d/yyyy') as Date,
+  concat(cage.designation, ' / ', lot.designation) as `Unit / Batch`,
+  abs(cltransdetails.fishintransaction) as Quantity,
+  cause.designation as Cause,
+  cltrans.remarks as Remarks
+from
+  cltrans,
+  cltransdetails,
+  cage,
+  cagelot,
+  lot,
+  transkind
+  left join cause on cltransdetails.causeid = cause.causeid
+where
+  cltrans.cltransid = cltransdetails.cltransid
+  and cltransdetails.cagelotid = cagelot.cagelotid
+  and cagelot.lotid = lot.lotid
+  and cage.cageid = cagelot.cageid
+  and cltrans.transkindid = transkind.transkindid
+  and cltrans.transkindid in (1, 3, 5, 6, 7, 8, 12)
+  and transkind.designation = 'Mortality'
+order by
+  lot.designation,
+  cage.designation,
+  cltrans.transdate,
+  cltrans.transkindid

@@ -1,0 +1,8 @@
+CREATE
+OR REPLACE VIEW view_samplings_import_transactions AS
+SELECT
+  date_format(to_date(date, 'MM-dd-yy'), 'M/d/yyyy') as Date,
+  concat(cage, ' / ', batch) as `Unit / Batch`,
+  sampleweight as `Av. Weight`
+FROM
+  view_sampling_details

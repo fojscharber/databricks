@@ -1,0 +1,24 @@
+CREATE
+OR REPLACE VIEW view_harvesting_import_transactions AS
+SELECT
+  concat(cage.designation, ' / ', lot.designation) as `Unit / Batch`,
+  date_format(transdate, 'd/M/yyyy') as Date,
+  'Seriola rivoliana' as Species,
+  abs(fishintransaction) as `Fish No`,
+  transactiontotalweight as `Total Weight`,
+  date_format(cagelot.enddate, 'd/M/yyyy') as `Close Unit`,
+  NULL as `Adjustment Type`, --negative number
+  NULL as `Harvest Category` --size categories
+FROM
+  cltransharvestdetails,
+  cltransdetails,
+  cltrans,
+  cagelot,
+  cage,
+  lot
+WHERE
+  cltransharvestdetails.cltransdetailsid = cltransdetails.cltransdetailsid
+  AND cltransdetails.cltransid = cltrans.cltransid
+  AND cltransdetails.cagelotid = cagelot.cagelotid
+  AND lot.lotid = cagelot.lotid
+  AND cagelot.cageid = cage.cageid

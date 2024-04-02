@@ -1,0 +1,21 @@
+SELECT DISTINCT camera_name FROM biomass_filtered
+-- SELECT site_id, camera_name FROM (
+-- VALUES
+-- 	(0, 'biocamsvid67'),
+-- 	(0, 'biocamsvid68'),
+-- 	(1, 'biocammynt82'),
+-- 	(1, 'biocamstereo74'),
+-- 	(1, 'biocamstereo76'),
+-- 	(1, 'biocamstereo77'),
+-- 	(1, 'biocamsvid92'),
+-- 	(2, 'biocamsvid68'),
+-- 	(2, 'biocamsvid91'),
+-- 	(2, 'biocamsvid97'),
+-- 	(3, 'biocamsvid89'),
+-- 	(4, 'biocamsvid68'),
+-- 	(4, 'biocamsvid75'),
+-- 	(4, 'biocamsvid83'),
+-- 	(4, 'biocamsvid84'),
+-- 	(4, 'biocamsvid90'),
+-- 	(4, 'biocamsvid96')
+-- ) as t(site_id, camera_name)

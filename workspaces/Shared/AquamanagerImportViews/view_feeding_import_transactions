@@ -1,0 +1,12 @@
+CREATE
+OR REPLACE VIEW view_feeding_import_transactions AS
+SELECT
+  date_format(to_date(date, 'MM-dd-yy'), 'M/d/yyyy') as Date,
+  concat(cage, ' / ', batch) as `Unit / Batch`,
+  foodType as Feed,
+  store as Store,
+  foodbatchcode as `Batch Code`,
+  foodquantity as Quantity,
+  cltranremarks as Remarks
+FROM
+  view_feeding_transactions
